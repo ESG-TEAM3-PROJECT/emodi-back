@@ -2,6 +2,8 @@ package com.emodi.emodi.entity;
 
 import java.time.LocalDate;
 
+import com.emodi.emodi.entity.common.BaseTimeEntity;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -20,7 +22,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Getter
-public class Diary {
+public class Diary extends BaseTimeEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
