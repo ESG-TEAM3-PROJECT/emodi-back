@@ -11,7 +11,7 @@ import jakarta.persistence.EntityListeners;
 import jakarta.persistence.MappedSuperclass;
 
 @MappedSuperclass
-@EntityListeners((AuditingEntityListener.class))
+@EntityListeners(AuditingEntityListener.class)
 public abstract class BaseTimeEntity {
 	@CreatedDate
 	@Column(updatable = false, nullable = false)

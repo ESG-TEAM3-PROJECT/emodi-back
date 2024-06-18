@@ -14,6 +14,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -35,4 +37,27 @@ public class Diary {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "sentiment_id")
 	private Sentiment sentiment;
+
+	private LocalDateTime createdAt;
+	private LocalDateTime updatedAt;
+
+	// content 반환 메소드
+	public String getContent() {
+		return content;
+	}
+
+	// sentiment 설정 메소드
+	public void setSentiment(Sentiment sentiment) {
+		this.sentiment = sentiment;
+	}
+
+	// createdAt 설정 메소드
+	public void setCreatedAt(LocalDateTime createdAt) {
+		this.createdAt = createdAt;
+	}
+
+	// updatedAt 설정 메소드
+	public void setUpdatedAt(LocalDateTime updatedAt) {
+		this.updatedAt = updatedAt;
+	}
 }

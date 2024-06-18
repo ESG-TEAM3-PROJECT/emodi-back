@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Builder
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor(access = AccessLevel.PUBLIC)
 @AllArgsConstructor
 @Getter
 public class Sentiment {
@@ -21,4 +21,17 @@ public class Sentiment {
 	private Long id;
 
 	private String mood;
+
+	// 감정 분석 결과를 저장하는 필드 추가
+	private String sentiment;
+
+	// sentiment 설정 메소드
+	public void setSentiment(String sentiment) {
+		this.sentiment = sentiment;
+	}
+
+	// mood 설정 메소드
+	public void setMood(String mood) {
+		this.mood = mood;
+	}
 }
