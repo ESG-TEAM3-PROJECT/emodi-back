@@ -19,4 +19,14 @@ public class PasswordEncryptor {
 
 		return new String(hashedPasswordBytes, StandardCharsets.UTF_8);
 	}
+
+	public boolean matchPassword(String plainPassword, String encryptedPassword) {
+		BCrypt.Verifyer verifyer = BCrypt.verifyer();
+		BCrypt.Result result = verifyer.verify(
+			plainPassword.getBytes(StandardCharsets.UTF_8),
+			encryptedPassword.getBytes(StandardCharsets.UTF_8)
+		);
+
+		return result.verified;
+	}
 }

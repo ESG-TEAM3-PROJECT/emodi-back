@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.emodi.emodi.entity.User;
 import com.emodi.emodi.repository.UserRepository;
 import com.emodi.emodi.service.dto.SignupInfoRequest;
+import com.emodi.emodi.service.dto.request.LoginInfoRequest;
 
 import lombok.RequiredArgsConstructor;
 
@@ -24,5 +25,16 @@ public class AuthService {
 		String encryptedPassword = passwordEncryptor.encryptPassword(request.password());
 		User user = request.toUser(encryptedPassword);
 		return userRepository.save(user);
+	}
+
+	public User login(LoginInfoRequest request) {
+		User user = userRepository.findByUsername(request.username())
+			.orElseThrow(() -> new IllegalArgumentException("회원가입이 필요합니다."));
+
+		if (!passwordEncryptor.matchPassword(request.password(), user.getPassword())) {
+			throw new IllegalArgumentException("비밀번호가 일치하지 않습니다.");
+		}
+
+		return user;
 	}
 }
