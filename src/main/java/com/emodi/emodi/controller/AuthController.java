@@ -2,6 +2,8 @@ package com.emodi.emodi.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CookieValue;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,5 +44,10 @@ public class AuthController {
 
 		return ResponseEntity.status(HttpStatus.OK)
 			.body("로그인이 완료되었습니다.");
+	}
+
+	@GetMapping("/me")
+	public Long getUserId(@CookieValue("jwt") String token) {
+		return jwtProvider.verifyToken(token);
 	}
 }
