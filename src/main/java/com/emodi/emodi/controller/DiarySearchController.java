@@ -1,6 +1,5 @@
 package com.emodi.emodi.controller;
 
-import com.emodi.emodi.entity.Diary;
 import com.emodi.emodi.service.DiaryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -9,13 +8,13 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/diaries")
-public class DiaryRetrievalController {
+public class DiarySearchController {
 
     @Autowired
     private DiaryService diaryService;
 
     @GetMapping("/{diaryId}")
-    public ResponseEntity<?> getDiary(@PathVariable Long diaryId, @RequestHeader("Authorization") String token) {
+    public ResponseEntity<String> getDiary(@PathVariable Long diaryId, @CookieValue("jwt") String token) {
         try {
             validateToken(token);
             return diaryService.getDiary(diaryId)
