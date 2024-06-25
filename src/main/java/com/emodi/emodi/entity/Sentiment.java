@@ -23,4 +23,10 @@ public class Sentiment extends BaseTimeEntity {
 	private Long id;
 
 	private String mood;
+
+	private double neutral;
+
+	private double positive;
+
+	private double negative;
 }
