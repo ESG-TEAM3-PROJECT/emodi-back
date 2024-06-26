@@ -27,11 +27,11 @@ public class JwtProvider {
 		byte[] secret = decodeSecretKey(secretKey);
 
 		return Jwts.builder()
-			.claim(USER_ID, userId)
-			.setIssuedAt(Date.from(now))
-			.setExpiration(Date.from(now.plus(2, ChronoUnit.HOURS)))
-			.signWith(Keys.hmacShaKeyFor(secret))
-			.compact();
+				.claim(USER_ID, userId)
+				.setIssuedAt(Date.from(now))
+				.setExpiration(Date.from(now.plus(2, ChronoUnit.HOURS)))
+				.signWith(Keys.hmacShaKeyFor(secret))
+				.compact();
 	}
 
 	public Long verifyToken(String token) {
@@ -39,9 +39,9 @@ public class JwtProvider {
 			byte[] secret = decodeSecretKey(secretKey);
 
 			Jws<Claims> result = Jwts.parserBuilder()
-				.setSigningKey(Keys.hmacShaKeyFor(secret))
-				.build()
-				.parseClaimsJws(token);
+					.setSigningKey(Keys.hmacShaKeyFor(secret))
+					.build()
+					.parseClaimsJws(token);
 
 			Claims body = result.getBody();
 			return body.get(USER_ID, Long.class);
