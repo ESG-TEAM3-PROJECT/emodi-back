@@ -29,5 +29,6 @@ public class DiaryService {
 		Diary diary = request.toDiary(user, sentiment);
 
 		return diaryRepository.save(diary);
+
 	}
 }
