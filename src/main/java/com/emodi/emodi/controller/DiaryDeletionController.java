@@ -14,13 +14,13 @@ import org.springframework.web.bind.annotation.*;
 public class DiaryDeletionController {
 
     @Autowired
-    private DeleteService deleteService;
-    private JwtProvider jwtProvider;
+    private final DeleteService deleteService;
+    private final JwtProvider jwtProvider;
 
     @DeleteMapping("/diaries/{diaryId}")
     public ResponseEntity<String> deleteDiary(@PathVariable Long diaryId, @CookieValue("jwt") String token) {
             Long userId = jwtProvider.verifyToken(token);
-            deleteService.deleteDiary(diaryId);
+            deleteService.deleteDiary(userId);
             return ResponseEntity.ok("일기 삭제가 완료되었습니다.");
     }
 }
