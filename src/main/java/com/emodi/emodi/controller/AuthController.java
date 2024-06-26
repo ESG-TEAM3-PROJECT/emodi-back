@@ -14,6 +14,7 @@ import com.emodi.emodi.jwt.JwtProvider;
 import com.emodi.emodi.service.AuthService;
 import com.emodi.emodi.service.dto.SignupInfoRequest;
 import com.emodi.emodi.service.dto.request.LoginInfoRequest;
+import com.emodi.emodi.service.dto.response.UserIdDto;
 
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
@@ -47,7 +48,9 @@ public class AuthController {
 	}
 
 	@GetMapping("/me")
-	public Long getUserId(@CookieValue("jwt") String token) {
-		return jwtProvider.verifyToken(token);
+	public ResponseEntity<UserIdDto> getUserId(@CookieValue("jwt") String token) {
+		Long userId = jwtProvider.verifyToken(token);
+		return ResponseEntity.status(HttpStatus.OK)
+			.body(new UserIdDto(userId));
 	}
 }
