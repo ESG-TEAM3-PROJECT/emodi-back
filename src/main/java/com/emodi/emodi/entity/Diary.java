@@ -32,9 +32,16 @@ public class Diary extends BaseTimeEntity {
 	@JoinColumn(name = "sentiment_id")
 	private Sentiment sentiment;
 
+	@Column(nullable = false)
 	private LocalDateTime updatedAt;
 
-	public void setUpdatedAt(LocalDateTime updatedAt) {
-		this.updatedAt = updatedAt;
+	@PrePersist
+	public void prePersist() {
+		this.updatedAt = LocalDateTime.now();
+	}
+
+	@PreUpdate
+	public void preUpdate() {
+		this.updatedAt = LocalDateTime.now();
 	}
 }

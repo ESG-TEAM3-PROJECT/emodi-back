@@ -28,6 +28,7 @@ public class DiaryService {
 		Sentiment sentiment = sentimentService.analyze(request);
 
 		Diary diary = request.toDiary(user, sentiment);
+		diary.setUpdatedAt(LocalDateTime.now());  // Set updatedAt field
 
 		return diaryRepository.save(diary);
 	}
