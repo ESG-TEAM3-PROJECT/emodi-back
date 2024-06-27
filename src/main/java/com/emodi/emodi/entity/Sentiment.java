@@ -1,5 +1,7 @@
 package com.emodi.emodi.entity;
 
+import com.emodi.emodi.entity.common.BaseTimeEntity;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -15,12 +17,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
 @AllArgsConstructor
 @Getter
-public class Sentiment {
+public class Sentiment extends BaseTimeEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	private String mood;
+
 
 	// 감정 분석 결과를 저장하는 필드 추가
 	private String sentiment;
@@ -34,4 +37,11 @@ public class Sentiment {
 	public void setMood(String mood) {
 		this.mood = mood;
 	}
+
+	private double neutral;
+
+	private double positive;
+
+	private double negative;
+
 }
